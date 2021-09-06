@@ -25,7 +25,7 @@
   "model_dir": "GPT-J-6B",
 
   "train_set": "beckett.train.index",
-  "val_set": {},
+  "val_set": "beckett.train.index",
 
   "val_batches": 100,
   "val_every": 500,
