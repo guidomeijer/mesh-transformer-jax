@@ -21,7 +21,7 @@
 
   "tpu_size": 8,
 
-  "bucket": "gpt-neo-us-2345",
+  "bucket": "gpt-west-europe",
   "model_dir": "GPT-J-6B",
 
   "train_set": "beckett.train.index",
