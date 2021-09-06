@@ -24,8 +24,11 @@
   "bucket": "gpt-west-europe",
   "model_dir": "GPT-J-6B",
 
-  "train_set": "beckett.train.index",
-  "val_set": "beckett.train.index",
+  "train_set": "beckett.train.index",  
+  "val_set": {},
+
+  "eval_harness_tasks": [
+  ],
 
   "val_batches": 100,
   "val_every": 500,
