@@ -68,7 +68,7 @@ if __name__ == "__main__":
         network = CausalTransformer(params)
 
         start = time.time()
-        network.state = read_ckpt(network.state, f"gs://{bucket}/{model_dir}/{dataset}/step_{ckpt_step}/", devices.shape[1])
+        network.state = read_ckpt(network.state, f"gs://{bucket}/{model_dir}/{dataset}/", devices.shape[1])
         print(f"network loaded in {time.time() - start:.06}s")
 
         start = time.time()
