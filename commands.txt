@@ -5,4 +5,4 @@ gcloud alpha compute tpus tpu-vm ssh tpu-west-europe --zone europe-west4-a
 python3 slim_model.py --config=configs/beckett_config.json --dataset=endgame-godot-krapp-v1
 
 # Transform sharded checkpoint into pytorch hugging face format
-python3 to_hf_weights.py --input_ckpt gs://gpt-west-europe/GPT-J-6B_slim/endgame-godot-krapp-v1 --config ./configs/beckett_slim_config.json --output_path gs://gpt-west-europe/pytorch-hugging-face/endgame-godot-krapp-v1
+python3 to_hf_weights.py --input-ckpt gs://gpt-west-europe/GPT-J-6B_slim/endgame-godot-krapp-v1 --config ./configs/beckett_slim_config.json --output-path gs://gpt-west-europe/pytorch-hugging-face/endgame-godot-krapp-v1
