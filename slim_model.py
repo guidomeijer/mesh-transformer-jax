@@ -18,6 +18,7 @@ def parse_args():
     # Parse command line arguments
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", type=str, default=None, help="Config file location")
+    parser.add_argument("--dataset", type=str, default=None, help="Fine tuning dataset to use")
     parser.add_argument("--ckpt-step", type=int, default=-1, help="Step number of the checkpoint to convert (if not specified, converts the most recent checkpoint)")
     parser.add_argument("--f16", default=False, action="store_true", help="Convert to float16 (instead of bfloat16)")
 
@@ -28,6 +29,7 @@ def parse_args():
 if __name__ == "__main__":
     args = parse_args()
     params = json.load(open(args.config))
+    dataset = args.dataset
     convert_fn = to_f16 if args.f16 else to_bf16
 
     cores_per_replica = params["cores_per_replica"]
@@ -53,7 +55,7 @@ if __name__ == "__main__":
     mesh_shape = (jax.device_count() // cores_per_replica, cores_per_replica)
     devices = np.array(jax.devices()).reshape(mesh_shape)
 
-    with open(f"gs://{bucket}/{model_dir}/meta.json", "r") as f:
+    with open(f"gs://{bucket}/{model_dir}/{dataset}/meta.json", "r") as f:
         meta = json.load(f)
 
     if args.ckpt_step > -1:
@@ -66,7 +68,7 @@ if __name__ == "__main__":
         network = CausalTransformer(params)
 
         start = time.time()
-        network.state = read_ckpt(network.state, f"gs://{bucket}/{model_dir}/step_{ckpt_step}/", devices.shape[1])
+        network.state = read_ckpt(network.state, f"gs://{bucket}/{model_dir}/{dataset}/step_{ckpt_step}/", devices.shape[1])
         print(f"network loaded in {time.time() - start:.06}s")
 
         start = time.time()
