@@ -24,7 +24,7 @@
   "bucket": "gpt-west-europe",
   "model_dir": "GPT-J-6B",
 
-  "train_set": "beckett.train.index",
+  "train_set": "novels.train.index",
   "val_set": {},
 
   "eval_harness_tasks": [
