@@ -12,7 +12,10 @@ python3 device_train.py --config=./configs/DATASET_config.json --tune-model-path
 python3 device_sample_custom.py --config=./configs/DATASET_config.json --dataset=DATASET
 
 # Compress model weights
-python3 slim_model.py --config=configs/beckett_config.json --dataset=endgame-godot-krapp-v1
+python3 slim_model.py --config=configs/DATASET_config.json --dataset=DATASET
+
+## Copy meta data file
+gsutil cp gs://gpt-west-europe/GPT-J-6B/DATASET/meta.json gs://gpt-west-europe/GPT-J-6B/DATASET_slim
 
 # Transform sharded checkpoint into pytorch hugging face format
 python3 to_hf_weights.py --input-ckpt gs://gpt-west-europe/GPT-J-6B_slim/endgame-godot-krapp-v1 --config ./configs/beckett_slim_config.json --output-path gs://gpt-west-europe/pytorch-hugging-face/endgame-godot-krapp-v1
