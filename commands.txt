@@ -2,8 +2,11 @@
 gcloud alpha compute tpus tpu-vm ssh tpu-west-europe --zone europe-west4-a
 
 # Cloud bucket trained model files
-gsutil mv gs://gpt-west-europe/GPT-J-6B/step_10 gs://gpt-west-europe/GPT-J-6B/DATASET_NAME
-gsutil mv gs://gpt-west-europe/GPT-J-6B/meta.json gs://gpt-west-europe/GPT-J-6B/DATASET_NAME
+gsutil mv gs://gpt-west-europe/GPT-J-6B/step_10 gs://gpt-west-europe/GPT-J-6B/DATASET
+gsutil mv gs://gpt-west-europe/GPT-J-6B/meta.json gs://gpt-west-europe/GPT-J-6B/DATASET
+
+# Fine tune model
+python3 device_train.py --config=./configs/DATASET_config.json --tune-model-path=gs://gpt-west-europe/GPT-J-6B/step_383500/
 
 # Sample from model
 pyhton3 device_sample_custom.py --config=./configs/beckett_config.json --dataset=DATASET_NAME
