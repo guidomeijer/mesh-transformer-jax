@@ -9,7 +9,7 @@ gsutil mv gs://gpt-west-europe/GPT-J-6B/meta.json gs://gpt-west-europe/GPT-J-6B/
 python3 device_train.py --config=./configs/DATASET_config.json --tune-model-path=gs://gpt-west-europe/GPT-J-6B/step_383500/
 
 # Sample from model
-pyhton3 device_sample_custom.py --config=./configs/beckett_config.json --dataset=DATASET_NAME
+python3 device_sample_custom.py --config=./configs/DATASET_config.json --dataset=DATASET
 
 # Compress model weights
 python3 slim_model.py --config=configs/beckett_config.json --dataset=endgame-godot-krapp-v1
