@@ -1,12 +1,15 @@
 # Connect to tpu from Google cloud SDK shell
 gcloud alpha compute tpus tpu-vm ssh tpu-west-europe --zone europe-west4-a
 
+# Cloud bucket trained model files
+gsutil mv gs://gpt-west-europe/GPT-J-6B/step_10 gs://gpt-west-europe/GPT-J-6B/DATASET_NAME
+gsutil mv gs://gpt-west-europe/GPT-J-6B/meta.json gs://gpt-west-europe/GPT-J-6B/DATASET_NAME
+
+# Sample from model
+pyhton3 device_sample_custom.py --config=./configs/beckett_config.json --dataset=DATASET_NAME
+
 # Compress model weights
 python3 slim_model.py --config=configs/beckett_config.json --dataset=endgame-godot-krapp-v1
 
 # Transform sharded checkpoint into pytorch hugging face format
-<<<<<<< HEAD
 python3 to_hf_weights.py --input-ckpt gs://gpt-west-europe/GPT-J-6B_slim/endgame-godot-krapp-v1 --config ./configs/beckett_slim_config.json --output-path gs://gpt-west-europe/pytorch-hugging-face/endgame-godot-krapp-v1
-=======
-python3 to_hf_weights.py --input_ckpt gs://gpt-west-europe/GPT-J-6B_slim/endgame-godot-krapp-v1 --config ./configs/beckett_slim_config.json --output_path gs://gpt-west-europe/pytorch-hugging-face/endgame-godot-krapp-v1
->>>>>>> master
